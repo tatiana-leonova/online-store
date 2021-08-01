@@ -1,6 +1,7 @@
 export default {
   products: [],
   productCategories: [],
+  productsInCart: [],
   sortTypes: [
     {
       type: 'price',
@@ -12,5 +13,7 @@ export default {
     },
   ],
   selectedSorting: '',
-  activeCategory: ''
+  activeCategory: '',
+  isOpenCart: false,
+  isOpenSelect: false
 }

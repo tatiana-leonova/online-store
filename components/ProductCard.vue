@@ -1,59 +1,52 @@
 <template>
   <li class="product-card">
     <div class="product-card__top-wrapper">
-      <product-rating :rating="rating"></product-rating>
-      <a href="">
-        <product-basket-icon class="product-card__basket-icon"
-        ></product-basket-icon>
-      </a>
+      <product-rating class="product-card__rating"
+                      :rating="product.rating"></product-rating>
+      <button v-if="!product.isInCart"
+              class="product-card__card-button"
+              title="Добавить товар в корзину"
+              @click.prevent="onAddProductToCart(product)">
+        <product-cart-icon class="product-card__card-icon"
+        ></product-cart-icon>
+      </button>
+      <button v-else
+              class="product-card__trash-button"
+              title="Удалить товар из корзины"
+              @click="onRemoveProductFromCart(product.id)">
+        <trash-icon class="product-card__trash-icon"></trash-icon>
+      </button>
     </div>
     <img
-      :src="`https://frontend-test.idaproject.com${photo}`"
-      :alt="`Изображение ${name}`"
-      width="142"
-      height="180">
+      :src="`https://frontend-test.idaproject.com${product.photo}`"
+      :alt="`Изображение ${product.name}`"
+      width="180"
+      height="210">
     <a href="#">
-      <h3 class="product-card__title">{{ name | capitalized }}</h3>
+      <h3 class="product-card__title">{{ product.name | capitalized }}</h3>
     </a>
-    <strong class="product-card__price">{{ price | formatted }} ₽</strong>
+    <strong class="product-card__price">{{ product.price | formatted }} ₽</strong>
   </li>
 </template>
 
 <script>
 import ProductRating from "~/components/ProductRating";
-import ProductBasketIcon from "~/components/ProductBasketIcon";
+import ProductCartIcon from "~/components/ProductCartIcon";
+import TrashIcon from "~/components/TrashIcon";
+import {mapActions, mapState} from "vuex";
 
 export default {
   name: "ProductCard",
   components: {
     'product-rating': ProductRating,
-    'product-basket-icon': ProductBasketIcon
-
+    'product-cart-icon': ProductCartIcon,
+    'trash-icon': TrashIcon
   },
   props: {
-    photo: {
-      type: String,
-      required: true
-    },
-    name: {
-      type: String,
-      required: true
-    },
-    price: {
-      type: Number,
-      required: true
-    },
-    rating: {
-      type: Number,
-      required: true
-    },
-    category: {
-      type: Number,
+    product: {
+      type: Object,
       required: true
     }
-  },
-  data() {
-    return {}
   },
   filters: {
     formatted: value => {
@@ -72,39 +65,64 @@ export default {
       return result
     }
   },
+
+  methods: {
+    ...mapActions(['setAddProductToCart', 'setRemoveProductFromCart', 'setChangeCartState']),
+
+    onAddProductToCart(product) {
+      this.setAddProductToCart(product)
+      this.setChangeCartState({id: product.id, isInCart: true})
+
+    },
+
+    onRemoveProductFromCart(id) {
+      this.setRemoveProductFromCart(id)
+      this.setChangeCartState({id: id, isInCart: false})
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .product-card {
+  position: relative;
   width: 264px;
   padding: 18px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
   margin-bottom: 15px;
 
+  &__rating {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+  }
+
   a {
     text-decoration: none;
+    transition: all 0.5s;
+
+    &:hover, &:focus {
+      h3 {
+        text-decoration: underline;
+      }
+    }
+
+    &:active {
+      opacity: 0.5;
+    }
   }
 
   img {
     display: block;
-    margin: 0 auto;
+    margin: -15px auto 0px auto;
   }
 
   &__title {
     font-size: 14px;
     font-weight: 400;
     color: $color_gray;
-    transition: all 0.5s ease;
 
-    &:hover, &:focus {
-      text-decoration: underline;
-    }
-
-    &:active {
-      opacity: 0.5;
-    }
   }
 
   &__price {
@@ -119,9 +137,57 @@ export default {
     align-items: center;
   }
 
-  &__basket-icon {
+  &__card-button {
+    position: absolute;
+    top: 16px;
+    right: 15px;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+  }
+
+  &__card-icon {
     width: 16px;
     height: 16px;
+    fill: $color_gray-light;
+    transition: all 0.5s ease;
+
+    &:hover, &:focus {
+      fill: $color_black;
+    }
+
+    &:active {
+      opacity: 0.5;
+    }
+  }
+
+  &__trash-button {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    border: none;
+    background-color: inherit;
+    padding: 0;
+    cursor: pointer;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    &:hover, &:focus {
+      svg {
+        fill: $color_black;
+
+      }
+    }
+
+    &:active {
+      opacity: 0.5;
+    }
+  }
+
+  &__trash-icon {
     fill: $color_gray-light;
     transition: all 0.5s ease;
 

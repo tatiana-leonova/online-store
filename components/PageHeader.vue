@@ -3,7 +3,7 @@
     <div class="container">
       <div class="page-header__wrapper">
         <brand-logo></brand-logo>
-        <ProductBasket></ProductBasket>
+        <product-cart-btn></product-cart-btn>
       </div>
     </div>
   </header>
@@ -11,14 +11,14 @@
 
 <script>
 import BrandLogo from "@/components/BrandLogo.vue";
-import ProductBasket from "@/components/ProductBasket.vue";
+import ProductCartBtn from "@/components/ProductCartBtn.vue";
 
 export default {
   name: "PageHeader",
 
   components: {
     'brand-logo': BrandLogo,
-    'product-basket': ProductBasket,
+    'product-cart-btn': ProductCartBtn,
   },
 }
 </script>
@@ -35,7 +35,7 @@ export default {
     padding: 20px;
   }
 
-  &__basket-icon {
+  &__cart-icon {
     fill: $color_black;
   }
 }

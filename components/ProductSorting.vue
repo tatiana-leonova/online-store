@@ -1,35 +1,40 @@
 <template>
   <div class="product-sorting">
-    <p class="product-sorting__title">Сортировать по: {{ selected.title }}</p>
-    <select class="product-sorting__select"
-            name="sorting"
-            id="sorting"
-            v-model="selected">
-      <option v-for="type in sortTypes" :value="type" :key="type.type">
-        По {{ type.title }}
-      </option>
-    </select>
+    <button class="product-sorting__title"
+            @click="onClickTitleButton">Сортировать по: {{ selected.title }}
+    </button>
+    <custom-select :sortTypes="sortTypes"></custom-select>
   </div>
 </template>
 
 <script>
-import {mapState} from "vuex";
+import {mapActions, mapState} from "vuex";
+import CustomSelect from "@/components/CustomSelect.vue";
 
 export default {
   name: "ProductSorting",
 
+  components: {
+    'custom-select': CustomSelect,
+  },
   computed: {
-    ...mapState(['sortTypes', 'selectedSorting']),
+    ...mapState(['sortTypes', 'selectedSorting', 'isOpenSelect']),
 
     selected: {
       get() {
         return this.$store.state.selectedSorting
       },
       set(selected) {
-        console.log(selected)
         this.$store.commit('setSelectedSorting', selected)
         this.$store.commit('setSortProducts', selected.type)
       }
+    }
+  },
+  methods: {
+    ...mapActions(['setIsOpenSelect']),
+
+    onClickTitleButton() {
+      this.setIsOpenSelect(!this.isOpenSelect)
     }
   },
 
@@ -41,10 +46,21 @@ export default {
 
 <style lang="scss" scoped>
 .product-sorting {
+  position: relative;
+
   &__title {
     font-size: 16px;
     font-weight: 400;
     color: $color_black;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    margin-left: auto;
+
+    &:hover, &:focus {
+      opacity: 0.7;
+    }
   }
 
   &__select {

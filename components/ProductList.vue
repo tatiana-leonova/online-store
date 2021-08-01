@@ -1,15 +1,18 @@
 <template>
-  <ul class="product-list">
-    <product-card class="catalog__product-card"
-                  v-for="product in products"
-                  :key="product.id"
-                  :photo="product.photo"
-                  :name="product.name"
-                  :price="product.price"
-                  :rating="product.rating"
-                  :category="product.category">
-    </product-card>
-  </ul>
+  <div>
+    <ul v-if="products.length"
+        class="product-list">
+      <product-card class="catalog__product-card"
+                    v-for="product in products"
+                    :key="product.id"
+                    :product="product">
+      </product-card>
+    </ul>
+    <div v-else
+         class="product-list--empty">
+      <h3>Список товаров пуст</h3>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -33,5 +36,13 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.product-list--empty {
+  margin: 0 auto;
+
+  h3 {
+    text-align: center;
+  }
 }
 </style>
