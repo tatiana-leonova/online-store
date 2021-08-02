@@ -7,10 +7,15 @@ function setIsInChart(productsInCart, products) {
   for (let i = 0; i < productsInCart.length; i++) {
     for (let j = 0; j < products.length; j++) {
       if (productsInCart[i].id === products[j].id) {
-        const product = products[j]
-        Vue.set(product, "isInCart", true)
+        Vue.set(products[j], "isInCart", true)
       }
     }
+  }
+}
+
+function clearInCart(products) {
+  for (let i = 0; i < products.length; i++) {
+    Vue.set(products[i], "isInCart", false)
   }
 }
 
@@ -64,11 +69,20 @@ export default {
     state.isOpenSelect = boolean
   },
 
+  setIsFormSent: (state, boolean) => {
+    state.isFormSent = boolean
+  },
+
   setProductsInCartStorage: (state, products) => {
     if (!products) {
       return
     }
     state.productsInCart = products
     setIsInChart(state.productsInCart, state.products)
+  },
+
+  setClearProductsInCart: (state) => {
+    state.productsInCart = []
+    clearInCart(state.products)
   }
 }

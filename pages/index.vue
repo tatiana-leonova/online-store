@@ -7,7 +7,6 @@
             Каталог
           </h1>
           <product-sorting class="catalog__product-sorting">
-
           </product-sorting>
         </div>
         <div>

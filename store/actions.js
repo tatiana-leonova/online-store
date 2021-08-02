@@ -52,11 +52,20 @@ export default {
     commit('setIsOpenCart', boolean)
   },
 
+  setIsFormSent: ({commit}, boolean) => {
+    commit('setIsFormSent', boolean)
+  },
+
   setIsOpenSelect({commit}, boolean) {
     commit('setIsOpenSelect', boolean)
   },
 
   setProductsInCartStorage({commit}) {
     commit('setProductsInCartStorage', JSON.parse(localStorage.getItem('cartProducts')))
-  }
+  },
+
+  setClearProductsInCart: ({commit}) => {
+    localStorage.removeItem("cartProducts");
+    commit('setClearProductsInCart')
+  },
 }

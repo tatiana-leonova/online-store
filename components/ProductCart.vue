@@ -1,56 +1,59 @@
 <template>
-  <div v-if="isOpenCart"
-       class="cart">
-    <div class="cart__wrapper">
-      <div class="cart__wrapper-content">
-        <div class="cart__title-wrapper">
-          <h2>Корзина</h2>
-          <button class="cart__btn-close"
-                  type="button"
-                  aria-label="Закрыть корзину"
-                  @click="onCloseCart">
-            &#215;
-          </button>
-        </div>
+  <transition name="cart">
+    <div v-if="isOpenCart"
+         class="cart">
+      <div class="cart__wrapper">
+        <div class="cart__wrapper-content">
+          <div class="cart__title-wrapper">
+            <h2>Корзина</h2>
+            <button class="cart__btn-close"
+                    type="button"
+                    aria-label="Закрыть корзину"
+                    @click="onCloseCart">
+              &#215;
+            </button>
+          </div>
+          <div v-if="!isFormSent">
+            <div v-if="!productsInCart.length">
+              <p class="cart__text">Пока что вы ничего не добавили
+                в корзину.</p>
+              <a class="button"
+                 @click="onCloseCart"
+                 href="#">Перейти к выбору</a>
+            </div>
 
-        <!--    <div v-if="!productsInCart.length">-->
-        <p class="cart__text">Пока что вы ничего не добавили
-          в корзину.</p>
-        <a class="button"
-           @click="onCloseCart"
-           href="#">Перейти к выбору</a>
-        <!--    </div>-->
-
-        <!--    <div v-else>-->
-        <h3 class="cart__title-min">Товары в корзине</h3>
-        <ul class="cart__products-list">
-          <cart-product-card v-for="product in productsInCart"
-                             :product="product"
-                             :key="product.id"></cart-product-card>
-        </ul>
-        <order-form></order-form>
-        <!--    </div>-->
-
-        <div class="cart__success">
-          <img class="cart__success-img"
-               src="@/assets/img/ok-emoji.png"
-               alt="эмоджи успешной отправки формы"
-               width="80"
-               height="80">
-          <h3 class="cart__success-title">Заявка успешно отправлена</h3>
-          <p class="cart__success-text">Вскоре наш менеджер свяжется с Вами</p>
-        </div>
-        <div>
+            <div v-else>
+              <h3 class="cart__title-min">Товары в корзине</h3>
+              <ul class="cart__products-list">
+                <cart-product-card v-for="product in productsInCart"
+                                   :product="product"
+                                   :key="product.id"></cart-product-card>
+              </ul>
+              <order-form></order-form>
+            </div>
+          </div>
+          <div v-if="isFormSent"
+               class="cart__success">
+            <img class="cart__success-img"
+                 src="@/assets/img/ok-emoji.png"
+                 alt="эмоджи успешной отправки формы"
+                 width="80"
+                 height="80">
+            <h3 class="cart__success-title">Заявка успешно отправлена</h3>
+            <p class="cart__success-text">Вскоре наш менеджер свяжется с Вами</p>
+          </div>
+          <div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
 import OrderForm from "~/components/OrderForm";
 import CartProductCard from "~/components/CartProductCard";
-import {mapState} from "vuex";
+import {mapActions, mapState} from "vuex";
 
 export default {
   name: "ProductCart",
@@ -61,21 +64,33 @@ export default {
   },
 
   computed: {
-    ...mapState(['productsInCart', 'isOpenCart']),
+    ...mapState(['productsInCart', 'isOpenCart', 'isFormSent']),
 
     isOpenCart: {
       get() {
         return this.$store.state.isOpenCart
       },
       set(boolean) {
-        this.$store.commit('setIsOpenCart', boolean)
+        this.setIsOpenCart(boolean)
+      }
+    },
+
+    isFormSent: {
+      get() {
+        return this.$store.state.isFormSent
+      },
+      set(boolean) {
+        this.setIsFormSent(boolean)
       }
     },
   },
 
   methods: {
+    ...mapActions(['setIsFormSent', 'setIsOpenCart']),
+
     onCloseCart() {
       this.isOpenCart = false
+      this.isFormSent = false
     }
   }
 }
@@ -110,11 +125,11 @@ export default {
   &__wrapper-content {
     overflow-y: scroll;
     height: 100%;
-    padding: 50px;
+    padding: 50px 70px 50px 50px;
     margin-right: -20px;
 
     @media (max-width: $width-mobile-max) {
-      margin-left: -20px;
+      padding: 30px 50px 30px 30px;
     }
   }
 
@@ -147,6 +162,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    height: 90%;
   }
 
   &__success-img {
@@ -183,4 +199,22 @@ export default {
     }
   }
 }
+
+.cart-enter-active {
+  transition: all .5s ease;
+}
+.cart-leave-active {
+  transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.cart-enter, .cart-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+//.cart-enter-active, .cart-leave-active {
+//  transition: opacity .5s;
+//}
+//.cart-enter, .cart-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+//  opacity: 0;
+//}
 </style>

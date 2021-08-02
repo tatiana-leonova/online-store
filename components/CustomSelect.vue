@@ -1,6 +1,5 @@
 <template>
-  <div v-if="isOpenSelect"
-       class="custom-select"
+  <div class="custom-select"
        :data-value="selected"
        :data-list="sortTypes">
     <div>

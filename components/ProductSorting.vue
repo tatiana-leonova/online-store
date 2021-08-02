@@ -3,9 +3,12 @@
     <button class="product-sorting__title"
             @click="onClickTitleButton">Сортировать по: {{ selected.title }}
     </button>
-    <custom-select :sortTypes="sortTypes"
-                   class="product-sorting__custom-select"
-    ></custom-select>
+    <transition name="sorting">
+      <custom-select v-if="isOpenSelect"
+                     :sortTypes="sortTypes"
+                     class="product-sorting__custom-select">
+      </custom-select>
+    </transition>
   </div>
 </template>
 
@@ -66,6 +69,7 @@ export default {
   }
 
   &__custom-select {
+    z-index: 2;
     width: 160px;
     position: absolute;
     top: 30px;
@@ -75,5 +79,18 @@ export default {
       right: calc(50% - 80px);
     }
   }
+}
+
+.sorting-enter-active {
+  transition: all .2s ease;
+}
+
+.sorting-leave-active {
+  transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.sorting-enter, .sorting-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
 }
 </style>

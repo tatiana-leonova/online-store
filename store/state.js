@@ -16,5 +16,6 @@ export default {
   activeCategory: '',
   isOpenCart: false,
   isOpenSelect: false,
-  isLoading: false
+  isLoading: false,
+  isFormSent: false
 }

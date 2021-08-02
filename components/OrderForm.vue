@@ -1,66 +1,139 @@
 <template>
-  <form class="order-form" action="">
+  <form class="order-form">
     <h3 class="order-form__title">Оформить заказ</h3>
     <ul class="order-form__list">
       <li class="order-form__item"
-          v-for="(field, index) in InputsList">
-        <label :for="field.id"
+          v-for="input in inputs"
+          :key="input.id">
+        <label :for="input.id"
                class="is-hidden">
-          {{ field.title }}
+          {{ input.title }}
         </label>
-        <input :id="field.id"
-               :type="field.type"
-               :value="field.value"
-               :placeholder="[field.title]"
-               @input="onInput($event.target.value, index)">
+        <input :id="input.id"
+               :type="input.type"
+               v-model.trim="input.value"
+               :placeholder="[input.title]"
+               :class="{'order-form__error': !input.valid}"
+               @input="onInputText(input)"
+               @focus="applyMask(input)"
+        >
+        <span v-if="!input.valid"
+              class="order-form__item-error-text"
+        >Поле заполнено неверно</span>
       </li>
     </ul>
-    <button class="button" type="button">Отправить</button>
+    <button class="button"
+            type="submit"
+            @click="orderSubmit"
+            aria-label="Отправить форму">
+      Отправить
+    </button>
   </form>
 </template>
 
 <script>
+import {mapActions, mapState} from "vuex";
+
 export default {
   name: "OrderForm",
 
   data() {
     return {
-      InputsList: [
+      inputs: [
         {
           id: 'name',
           title: 'Ваше имя',
           type: 'text',
           value: '',
-          pattern: /^[a-zA-Z ]{4,30}$/,
-          valid: false
+          pattern: /^[а-яА-ЯёЁa-zA-Z]+$/,
+          valid: true,
         },
         {
           id: 'phone',
           title: 'Телефон',
           type: 'text',
           value: '',
-          pattern: /^[0-9]{7,14}$/,
-          valid: false
+          pattern: /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{10}$/,
+          valid: true
         },
         {
           id: 'adress',
           title: 'Адрес',
           type: 'text',
           value: '',
-          pattern: /^[a-zA-Z ]{10,70}$/,
-          valid: false
+          pattern: /^.{5,30}$/,
+          valid: true
         },
-      ]
+      ],
+      lastPhoneValue: ""
     }
   },
 
+  computed: {
+    ...mapState(['isFormSent']),
+
+    isFormSent: {
+      get() {
+        return this.$store.state.isFormSent
+      },
+      set(boolean) {
+        this.setIsFormSent(boolean)
+      }
+    },
+  },
+
   methods: {
-    onInput(value, i) {
-      let field = this.info[i];
-      field.value = value.trim();
-      field.valid = field.pattern.test(field.value);
+    ...mapActions(['setClearProductsInCart', 'setIsFormSent']),
+
+    orderSubmit(e) {
+      const notValidValues = this.inputs.filter(input => {
+        const result = input.pattern.test(input.value)
+        input.valid = result
+        return result === false
+      })
+
+      if (notValidValues.length) {
+        e.preventDefault()
+        return
+      }
+
+      this.isFormSent = true
+      this.setClearProductsInCart()
+    },
+
+    applyMask(input) {
+      if (input.id === 'phone') {
+        input.value = '+7 ('
+      }
+    },
+
+    onInputText(input) {
+      if (input.id === 'phone') {
+
+        if (input.value.length === 7) {
+          input.value = `${input.value}) `
+        }
+
+        if (input.value.length === 12 && this.lastPhoneValue.length < input.value.length) {
+          input.value = `${input.value}-`
+        }
+
+        if (input.value.length === 15 && this.lastPhoneValue.length < input.value.length) {
+          input.value = `${input.value}-`
+        }
+
+        if (input.value.length > 18) {
+          input.value = this.lastPhoneValue
+        }
+
+        if (this.lastPhoneValue.length > input.value.length && input.value.slice(-1) === "-") {
+          input.value = input.value.slice(0, -1);
+        }
+
+        this.lastPhoneValue = input.value
+      }
     }
-  }
+  },
 }
 </script>
 
@@ -79,6 +152,7 @@ export default {
   }
 
   &__item {
+    position: relative;
     margin-bottom: 20px;
   }
 
@@ -98,6 +172,18 @@ export default {
       line-height: 20px;
       color: $color_gray-light;
     }
+  }
+
+  &__item-error-text {
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    font-size: 12px;
+    color: $color_error;
+  }
+
+  &__error {
+    border: 1px solid $color_error !important;
   }
 }
 </style>

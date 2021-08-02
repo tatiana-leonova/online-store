@@ -10,7 +10,7 @@
 
 <script>
 import ProductCartIcon from "@/components/ProductCartIcon.vue";
-import {mapState} from "vuex";
+import {mapActions, mapState} from "vuex";
 
 export default {
   name: "ProductCartBtn",
@@ -26,12 +26,14 @@ export default {
         return this.$store.state.isOpenCart
       },
       set(boolean) {
-        this.$store.commit('setIsOpenCart', boolean)
+        this.setIsOpenCart(boolean)
       }
     },
   },
 
   methods: {
+    ...mapActions(['setIsOpenCart']),
+
     onClickCartButton() {
       this.isOpenCart = true
     }
