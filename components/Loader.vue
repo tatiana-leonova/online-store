@@ -42,13 +42,13 @@ export default {
   box-sizing: border-box;
   display: block;
   position: absolute;
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
   margin: 8px;
-  border: 8px solid #fff;
+  border: 8px solid $color_gray_light;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #fff transparent transparent transparent;
+  border-color: $color_gray_light transparent transparent transparent;
 }
 
 .loader div:nth-child(1) {

@@ -14,6 +14,9 @@ function setIsInChart(productsInCart, products) {
 }
 
 function clearInCart(products) {
+  if (!products) {
+    return
+  }
   for (let i = 0; i < products.length; i++) {
     Vue.set(products[i], "isInCart", false)
   }
@@ -32,6 +35,7 @@ export default {
 
   setSelectedSorting: (state, selected) => {
     state.selectedSorting = selected
+    state.isLoading = false
   },
 
   setSortProducts: (state, selectedField) => {

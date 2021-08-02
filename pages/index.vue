@@ -20,6 +20,7 @@
       </div>
       <product-cart></product-cart>
     </section>
+    <loader v-if="isLoading"></loader>
   </main>
 </template>
 
@@ -29,6 +30,8 @@ import ProductCategories from "@/components/ProductCategories.vue";
 import ProductCard from "@/components/ProductCard.vue";
 import ProductList from "@/components/ProductList.vue";
 import ProductCart from "@/components/ProductCart.vue";
+import Loader from "@/components/Loader.vue";
+
 import {mapActions, mapState} from "vuex";
 
 export default {
@@ -37,7 +40,8 @@ export default {
     'product-categories': ProductCategories,
     'product-card': ProductCard,
     'product-list': ProductList,
-    'product-cart': ProductCart
+    'product-cart': ProductCart,
+    'loader': Loader
   },
 
   async asyncData({store}) {
@@ -49,7 +53,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['productsInCart']),
+    ...mapState(['productsInCart', 'isLoading']),
   },
 
   methods: {

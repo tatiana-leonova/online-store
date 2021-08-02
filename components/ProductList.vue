@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul v-if="products.length"
+    <ul v-if="!isLoading"
         class="product-list">
       <product-card class="catalog__product-card"
                     v-for="product in products"
@@ -25,7 +25,7 @@ export default {
     'product-card': ProductCard,
   },
   computed: {
-    ...mapState(['products']),
+    ...mapState(['products', 'isLoading']),
   },
 }
 </script>

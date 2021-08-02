@@ -1,5 +1,6 @@
 export default {
-  async setProductCategories({commit, dispatch}) {
+  async setProductCategories({commit, state, dispatch}) {
+    state.isLoading = true
     await this.$axios.$get('https://frontend-test.idaproject.com/api/product-category').then(response => {
       commit('setProductCategories', response)
       return dispatch("setProducts", response[0].id)
