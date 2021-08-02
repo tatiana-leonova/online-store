@@ -77,8 +77,8 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 15px 25px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
   margin-bottom: 12px;
 
   &__title {
@@ -94,14 +94,14 @@ export default {
   }
 
   &__button {
-    border: none;
     background-color: inherit;
+    border: none;
     cursor: pointer;
     transition: all 0.5s ease;
 
     &:hover, &:focus {
-      transform: scale(1.1);
       opacity: 0.6;
+      transform: scale(1.1);
     }
 
     &:active {

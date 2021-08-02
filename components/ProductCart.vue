@@ -99,13 +99,13 @@ export default {
 
 <style lang="scss" scoped>
 .cart {
+  z-index: 30;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.9);
-  z-index: 30;
   transition: opacity 0.8s ease;
 
   &__wrapper {
@@ -184,9 +184,9 @@ export default {
   }
 
   &__btn-close {
+    font-size: 40px;
     border: none;
     background-color: inherit;
-    font-size: 40px;
     cursor: pointer;
     transition: all 0.5s ease;
 

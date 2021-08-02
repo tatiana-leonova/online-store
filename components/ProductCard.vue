@@ -157,8 +157,8 @@ export default {
     position: absolute;
     top: 16px;
     right: 15px;
-    border: none;
     background-color: inherit;
+    border: none;
     cursor: pointer;
   }
 
@@ -181,9 +181,9 @@ export default {
     position: absolute;
     top: 12px;
     right: 18px;
-    border: none;
-    background-color: inherit;
     padding: 0;
+    background-color: inherit;
+    border: none;
     cursor: pointer;
 
     svg {

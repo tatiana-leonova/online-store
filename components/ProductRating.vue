@@ -14,10 +14,6 @@
 export default {
   name: "ProductRating",
 
-  data() {
-    return {}
-  },
-
   props: {
     rating: {
       type: Number,

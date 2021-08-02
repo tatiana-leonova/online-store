@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "CardSvg"
+  name: "BrandLogo"
 }
 </script>
 
@@ -20,7 +20,6 @@ export default {
 .brand-logo {
   a {
     @include hover-focus-active;
-
     transition: all 0.5s;
   }
 }

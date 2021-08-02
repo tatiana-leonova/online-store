@@ -57,8 +57,8 @@ export default {
     font-size: 16px;
     font-weight: 400;
     color: $color_black;
-    border: none;
     background-color: inherit;
+    border: none;
     cursor: pointer;
     transition: all 0.5s ease;
     margin-left: auto;
@@ -70,10 +70,10 @@ export default {
 
   &__custom-select {
     z-index: 2;
-    width: 160px;
     position: absolute;
     top: 30px;
     right: 0;
+    width: 160px;
 
     @media (max-width: $width-mobile-max) {
       right: calc(50% - 80px);
@@ -90,7 +90,7 @@ export default {
 }
 
 .sorting-enter, .sorting-leave-to {
-  transform: translateY(-20px);
   opacity: 0;
+  transform: translateY(-20px);
 }
 </style>

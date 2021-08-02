@@ -157,14 +157,14 @@ export default {
   }
 
   input {
-    height: 50px;
-    width: 100%;
-    padding: 14px;
-    border: none;
     color: $color_gray-light;
     font-size: 14px;
     line-height: 20px;
-    background-color: #f8f8f8;
+    height: 50px;
+    width: 100%;
+    padding: 14px;
+    background-color: $color_extra_light;
+    border: none;
     border-radius: 8px;
 
     &::placeholder {

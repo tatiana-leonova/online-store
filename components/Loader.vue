@@ -18,24 +18,25 @@ export default {
 <style lang="scss" scoped>
 
 .loader-wrapper {
+  z-index: 999;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.9);
-  z-index: 999;
   transition: opacity 0.8s ease;
 }
 
 .loader {
-  position: absolute;
   z-index: 100;
+  position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
   width: 80px;
   height: 80px;
+  transform: translate(-50%, -50%);
+
 }
 
 .loader div {
@@ -44,11 +45,11 @@ export default {
   position: absolute;
   width: 80px;
   height: 80px;
-  margin: 8px;
   border: 8px solid $color_gray_light;
+  border-color: $color_gray_light transparent transparent transparent;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: $color_gray_light transparent transparent transparent;
+  margin: 8px;
 }
 
 .loader div:nth-child(1) {

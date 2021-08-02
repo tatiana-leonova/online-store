@@ -52,31 +52,31 @@ export default {
 <style lang="scss" scoped>
 .custom-select {
   ul {
-    width: 100%;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    font-size: 14px;
     position: absolute;
     z-index: 1;
-    background: #fff;
+    font-size: 14px;
+    background: $color_white;
+    width: 100%;
+    padding: 0;
+    list-style-type: none;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
     border-radius: 8px;
+    margin: 0;
   }
 
   li {
-    padding: 12px;
     color: $color_gray-light;
+    padding: 12px;
     cursor: pointer;
 
     &:hover {
       color: $color_black;
-      background: #F8F8F8;
+      background: $color_extra_light;
     }
   }
 
   .current {
-    background: #F8F8F8;
+    background: $color_extra_light;
   }
 }
 </style>

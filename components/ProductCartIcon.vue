@@ -19,7 +19,6 @@ export default {
 .card-svg {
   a {
     @include hover-focus-active;
-
     transition: all 0.5s;
   }
 }

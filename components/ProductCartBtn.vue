@@ -46,10 +46,10 @@ export default {
   position: relative;
 
   svg {
+    z-index: 1;
     width: 32px;
     height: 32px;
     fill: $color_black;
-    z-index: 1;
     transition: all 0.5s ease;
 
     &:hover, &:focus {
@@ -70,9 +70,9 @@ export default {
     color: $color_white;
     min-width: 17px;
     min-height: 16px;
+    padding: 0 6px;
     background-color: $color_gray-light;
     border-radius: 50%;
-    padding: 0 6px;
   }
 }
 </style>

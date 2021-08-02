@@ -3,8 +3,7 @@
     @click="scrollTop"
     v-show="visible"
     class="button-top"
-    aria-label="Вернуться в начало страницы"
-  >
+    aria-label="Вернуться в начало страницы">
     &uarr;
   </a>
 </template>
@@ -45,24 +44,24 @@ export default {
 
 <style lang="scss" scoped>
 .button-top {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  cursor: pointer;
-  margin: 0 auto;
-  font-size: 34px;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 2px solid $color_black;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  font-size: 34px;
   color: white;
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid $color_black;
   background-color: $color_black;
   outline: none;
+  cursor: pointer;
   transition: 0.5s ease;
+  margin: 0 auto;
 
   &:hover {
     color: $color_black;
@@ -70,9 +69,9 @@ export default {
   }
 
   &:active {
-    background-color: $color_black;
-    color: white;
     opacity: 1;
+    color: white;
+    background-color: $color_black;
   }
 }
 </style>

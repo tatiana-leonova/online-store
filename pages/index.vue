@@ -101,8 +101,8 @@ export default {
 
     @media (max-width: $width-mobile-max) {
       position: relative;
-      margin: 0 auto 50px auto;
       text-align: center;
+      margin: 0 auto 50px auto;
     }
   }
 
@@ -120,8 +120,8 @@ export default {
     @media (max-width: $width-tablet-max) {
       display: flex;
       flex-wrap: wrap;
-      width: 100%;
       justify-content: center;
+      width: 100%;
 
       li {
         margin-right: 30px;
@@ -135,8 +135,8 @@ export default {
 
     @media (max-width: $width-tablet-max) {
       width: 100%;
-      margin-left: 0;
       margin-top: 20px;
+      margin-left: 0;
     }
   }
 }
