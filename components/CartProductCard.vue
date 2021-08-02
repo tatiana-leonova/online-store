@@ -81,10 +81,10 @@ export default {
   border-radius: 8px;
   margin-bottom: 12px;
 
- &__title {
+  &__title {
     font-size: 14px;
     color: $color_gray;
-   margin-bottom: 5px;
+    margin-bottom: 5px;
   }
 
   &__price {

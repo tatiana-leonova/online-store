@@ -21,14 +21,15 @@
                  @click="onCloseCart"
                  href="#">Перейти к выбору</a>
             </div>
-
             <div v-else>
               <h3 class="cart__title-min">Товары в корзине</h3>
-              <ul class="cart__products-list">
+              <transition-group class="cart__products-list"
+                                name="list" tag="ul">
                 <cart-product-card v-for="product in productsInCart"
                                    :product="product"
-                                   :key="product.id"></cart-product-card>
-              </ul>
+                                   :key="product.id">
+                </cart-product-card>
+              </transition-group>
               <order-form></order-form>
             </div>
           </div>
@@ -179,7 +180,7 @@ export default {
   &__success-text {
     font-size: 16px;
     color: $color_gray;
-    margin-bottom: 5px 0;
+    margin: 5px 0;
   }
 
   &__btn-close {
@@ -201,20 +202,24 @@ export default {
 }
 
 .cart-enter-active {
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 }
+
 .cart-leave-active {
   transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
+
 .cart-enter, .cart-leave-to {
   transform: translateX(20px);
   opacity: 0;
 }
 
-//.cart-enter-active, .cart-leave-active {
-//  transition: opacity .5s;
-//}
-//.cart-enter, .cart-leave-to /* .fade-leave-active до версии 2.1.8 */ {
-//  opacity: 0;
-//}
+.list-enter-active, .list-leave-active {
+  transition: all 0.4s;
+}
+
+.list-enter, .list-leave-to {
+  opacity: 0;
+  transform: translateX(-30px);
+}
 </style>

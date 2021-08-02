@@ -128,12 +128,6 @@ export default {
     width: 1100px;
     margin-left: 20px;
 
-    //@media (max-width: $width-mobile-max) {
-    //  width: 100%;
-    //  margin-left: 0;
-    //  margin-top: 20px;
-    //}
-
     @media (max-width: $width-tablet-max) {
       width: 100%;
       margin-left: 0;

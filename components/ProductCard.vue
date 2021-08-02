@@ -3,19 +3,25 @@
     <div class="product-card__top-wrapper">
       <product-rating class="product-card__rating"
                       :rating="product.rating"></product-rating>
-      <button v-if="!product.isInCart"
-              class="product-card__card-button"
-              title="Добавить товар в корзину"
-              @click.prevent="onAddProductToCart(product)">
-        <product-cart-icon class="product-card__card-icon"
-        ></product-cart-icon>
-      </button>
-      <button v-else
-              class="product-card__trash-button"
-              title="Удалить товар из корзины"
-              @click="onRemoveProductFromCart(product.id)">
-        <trash-icon class="product-card__trash-icon"></trash-icon>
-      </button>
+      <transition name="button" mode="out-in">
+        <button v-if="!product.isInCart"
+                class="product-card__card-button"
+                title="Добавить товар в корзину"
+                @click.prevent="onAddProductToCart(product)">
+          <product-cart-icon class="product-card__card-icon"
+          ></product-cart-icon>
+        </button>
+      </transition>
+
+      <transition name="button" mode="out-in">
+
+        <button v-if="product.isInCart"
+                class="product-card__trash-button"
+                title="Удалить товар из корзины"
+                @click="onRemoveProductFromCart(product.id)">
+          <trash-icon class="product-card__trash-icon"></trash-icon>
+        </button>
+      </transition>
     </div>
     <img
       :src="`https://frontend-test.idaproject.com${product.photo}`"
@@ -209,5 +215,13 @@ export default {
       opacity: 0.5;
     }
   }
+}
+
+.button-enter-active, .button-leave-active {
+  transition: opacity 0.5s;
+}
+
+.button-enter, .button-leave-to {
+  opacity: 0;
 }
 </style>
