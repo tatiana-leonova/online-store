@@ -27,15 +27,20 @@ export default {
     state.productCategories = productCategories
   },
 
-  setProducts: (state, {products, category}) => {
-    state.products = products
+  setProducts: (state, products) => {
+    state.cacheProducts = products
+  },
+
+  setProductsInCategory: (state, category) => {
+    state.products = state.cacheProducts.filter(item => {
+      return item.category === category
+    })
     state.activeCategory = category
-    setIsInChart(state.productsInCart, state.products)
+    setIsInChart(state.productsInCart, state.cacheProducts)
   },
 
   setSelectedSorting: (state, selected) => {
     state.selectedSorting = selected
-    state.isLoading = false
   },
 
   setSortProducts: (state, selectedField) => {
@@ -48,6 +53,7 @@ export default {
       }
       return 0;
     })
+    state.isLoading = false
   },
 
   setAddProductToCart: (state, product) => {
@@ -61,7 +67,7 @@ export default {
   },
 
   setChangeCartState: (state, {id, isInCart}) => {
-    const product = state.products.find(item => item.id === id)
+    const product = state.cacheProducts.find(item => item.id === id)
     Vue.set(product, "isInCart", isInCart)
   },
 
@@ -82,11 +88,11 @@ export default {
       return
     }
     state.productsInCart = products
-    setIsInChart(state.productsInCart, state.products)
+    setIsInChart(state.productsInCart, state.cacheProducts)
   },
 
   setClearProductsInCart: (state) => {
     state.productsInCart = []
-    clearInCart(state.products)
+    clearInCart(state.cacheProducts)
   }
 }

@@ -47,6 +47,7 @@ export default {
   async asyncData({store}) {
     try {
       await store.dispatch('setProductCategories')
+      await store.dispatch('setProducts')
     } catch (err) {
       console.log(err);
     }

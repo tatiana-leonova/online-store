@@ -21,10 +21,10 @@ export default {
   },
 
   methods: {
-    ...mapActions(['setProducts']),
+    ...mapActions(['setProductsInCategory']),
 
     onCategoryClick(id) {
-      this.setProducts(id)
+      this.setProductsInCategory(id)
     },
   }
 }

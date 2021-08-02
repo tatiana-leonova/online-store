@@ -1,25 +1,25 @@
 export default {
-  async setProductCategories({commit, state, dispatch}) {
+  async setProductCategories({commit, state}) {
     state.isLoading = true
     await this.$axios.$get('https://frontend-test.idaproject.com/api/product-category').then(response => {
       commit('setProductCategories', response)
-      return dispatch("setProducts", response[0].id)
     }).catch(error => {
       console.log(error)
     })
   },
 
-  async setProducts({state, commit}, category) {
-    await this.$axios.$get('https://frontend-test.idaproject.com/api/product', {
-      params: {
-        category: category
-      }
-    }).then(response => {
-      commit('setProducts', {products: response, category: category})
-      commit('setSortProducts', state.selectedSorting.type)
+  async setProducts({commit, dispatch}) {
+    await this.$axios.$get('https://frontend-test.idaproject.com/api/product').then(response => {
+      commit('setProducts', response)
+      dispatch('setProductsInCategory', 1)
     }).catch(error => {
       console.log(error)
     })
+  },
+
+  setProductsInCategory({state, commit}, category) {
+    commit('setProductsInCategory', category)
+    commit('setSortProducts', state.selectedSorting.type)
   },
 
   setAddProductToCart({commit}, product) {
