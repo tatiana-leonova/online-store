@@ -92,6 +92,16 @@ export default {
   border-radius: 8px;
   margin-bottom: 15px;
 
+  @media (max-width: $width-tablet-max) {
+    width: 48%;
+  }
+
+  @media (max-width: $width-mobile-max) {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto 30px auto;
+  }
+
   &__rating {
     position: absolute;
     top: 15px;

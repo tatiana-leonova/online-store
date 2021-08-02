@@ -52,11 +52,6 @@ export default {
 
 <style lang="scss" scoped>
 .custom-select {
-  width: 160px;
-  position: absolute;
-  top: 30px;
-  right: 0;
-
   ul {
     width: 100%;
     list-style-type: none;

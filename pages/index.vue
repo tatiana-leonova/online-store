@@ -1,26 +1,25 @@
 <template>
   <main>
     <section class="catalog">
-    <div class="container">
-      <div class="catalog__wrapper-heading">
-        <h1 class="title">
-          Каталог
-        </h1>
-        <product-sorting class="catalog__product-sorting">
+      <div class="container">
+        <div class="catalog__wrapper-heading">
+          <h1 class="catalog__title">
+            Каталог
+          </h1>
+          <product-sorting class="catalog__product-sorting">
 
-        </product-sorting>
-      </div>
-      <div>
-        <div class="catalog__wrapper-content">
-          <product-categories class="catalog__product-categories">
-          </product-categories>
+          </product-sorting>
+        </div>
+        <div>
+          <div class="catalog__wrapper-content">
+            <product-categories class="catalog__product-categories">
+            </product-categories>
             <product-list class="catalog__product-list">
-
             </product-list>
+          </div>
         </div>
       </div>
-    </div>
-    <product-cart></product-cart>
+      <product-cart></product-cart>
     </section>
   </main>
 </template>
@@ -70,29 +69,77 @@ export default {
   margin-top: 32px;
 
   &__wrapper-heading {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 25px;
+    @media (min-width: $width-tablet) {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    @media (max-width: $width-tablet-max) {
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: $width-mobile-max) {
+      margin: 0 auto 25px auto;
+    }
+  }
+
+  &__title {
+    @media (max-width: $width-mobile-max) {
+      text-align: center;
+      margin-top: 50px;
+    }
   }
 
   &__product-sorting {
     position: absolute;
     top: 20px;
     right: 0;
+
+    @media (max-width: $width-mobile-max) {
+      position: relative;
+      margin: 0 auto 50px auto;
+      text-align: center;
+    }
   }
 
   &__wrapper-content {
     display: flex;
+
+    @media (max-width: $width-tablet-max) {
+      flex-direction: column;
+    }
   }
 
   &__product-categories {
-    width: 160px !important;
+    width: 160px;
+
+    @media (max-width: $width-tablet-max) {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: center;
+
+      li {
+        margin-right: 30px;
+      }
+    }
   }
 
   &__product-list {
     width: 1100px;
     margin-left: 20px;
+
+    //@media (max-width: $width-mobile-max) {
+    //  width: 100%;
+    //  margin-left: 0;
+    //  margin-top: 20px;
+    //}
+
+    @media (max-width: $width-tablet-max) {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 20px;
+    }
   }
 }
 </style>

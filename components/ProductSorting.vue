@@ -3,7 +3,9 @@
     <button class="product-sorting__title"
             @click="onClickTitleButton">Сортировать по: {{ selected.title }}
     </button>
-    <custom-select :sortTypes="sortTypes"></custom-select>
+    <custom-select :sortTypes="sortTypes"
+                   class="product-sorting__custom-select"
+    ></custom-select>
   </div>
 </template>
 
@@ -63,24 +65,14 @@ export default {
     }
   }
 
-  &__select {
-    display: block;
-    box-sizing: border-box;
+  &__custom-select {
+    width: 160px;
+    position: absolute;
+    top: 30px;
+    right: 0;
 
-    option {
-      font-size: 14px;
-      font-weight: 400;
-      color: $color_gray-light;
-
-      &:hover,
-      &:focus {
-        color: $color_black;
-        background-color: $color_extra_light !important;
-      }
-
-      &:active {
-        opacity: 0.5;
-      }
+    @media (max-width: $width-mobile-max) {
+      right: calc(50% - 80px);
     }
   }
 }

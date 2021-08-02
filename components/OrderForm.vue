@@ -1,6 +1,6 @@
 <template>
   <form class="order-form" action="">
-    <h3>Оформить заказ</h3>
+    <h3 class="order-form__title">Оформить заказ</h3>
     <ul class="order-form__list">
       <li class="order-form__item"
           v-for="(field, index) in InputsList">
@@ -68,6 +68,14 @@ export default {
 .order-form {
   &__list {
     @include no-list;
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 400;
+    color: $color_gray;
+    margin-bottom: 16px;
   }
 
   &__item {

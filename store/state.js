@@ -15,5 +15,6 @@ export default {
   selectedSorting: '',
   activeCategory: '',
   isOpenCart: false,
-  isOpenSelect: false
+  isOpenSelect: false,
+  isLoading: false
 }

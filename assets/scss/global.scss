@@ -48,11 +48,13 @@ img {
   background-color: $color_black;
   padding: 14px;
   width: 100%;
+  max-width: 400px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.5s ease;
+  margin: 0 auto;
 
   &:hover, &:focus {
     background-color: $color_gray
@@ -64,20 +66,21 @@ img {
 }
 
 .container {
-  @media (min-width: $width-desktop-min) {
-    max-width: $width-desktop-min;
-    padding: 0 88px;
+  @media (max-width: $width-mobile-max) {
+    max-width: $width-tablet-max;
+    padding: 0 20px;
+    width: auto;
+  }
+
+  @media (min-width: $width-tablet) {
+    max-width: $width-tablet-max;
+    padding: 0 40px;
     margin: 0 auto;
   }
 
-  //@media (max-width: $width-mobile-max) {
-  //  max-width: $width-mobile-max;
-  //  padding: 0 20px;
-  //  width: auto;
-  //}
-  //
-  //@media (min-width: $width-tablet) {
-  //  max-width: $width-mobile-max;
-  //  padding: 0 40px;
-  //}
+  @media (min-width: $width-desktop) {
+    max-width: $width-desktop;
+    padding: 0 88px;
+    margin: 0 auto;
+  }
 }

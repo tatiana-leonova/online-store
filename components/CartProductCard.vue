@@ -2,11 +2,11 @@
   <li class="cart-product-card">
     <img :src="`https://frontend-test.idaproject.com${product.photo}`"
          :alt="`Изображение ${product.name}`"
-         width="70"
-         height="90">
+         width="80"
+         height="100">
     <div>
-      <h3>{{ product.name | capitalized }}</h3>
-      <strong>{{ product.price | formatted }} ₽</strong>
+      <h3 class="cart-product-card__title">{{ product.name | capitalized }}</h3>
+      <strong class="cart-product-card__price">{{ product.price | formatted }} ₽</strong>
       <product-rating :rating="product.rating"
       ></product-rating>
     </div>
@@ -79,6 +79,19 @@ export default {
   padding: 15px 25px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
+  margin-bottom: 12px;
+
+ &__title {
+    font-size: 14px;
+    color: $color_gray;
+   margin-bottom: 5px;
+  }
+
+  &__price {
+    display: inline-block;
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
 
   &__button {
     border: none;
