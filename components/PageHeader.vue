@@ -25,6 +25,12 @@ export default {
 
 <style lang="scss" scoped>
 .page-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background-color: $color_white;
   border-radius: 0 0 8px 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 
@@ -32,7 +38,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 20px 0;
   }
 
   &__cart-icon {

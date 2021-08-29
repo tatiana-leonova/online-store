@@ -70,7 +70,11 @@ export default {
 <style lang="scss">
 .catalog {
   position: relative;
-  margin-top: 32px;
+  padding-top: 75px;
+
+  @media (min-width: $width-tablet) {
+    margin-top: 32px;
+  }
 
   &__wrapper-heading {
     @media (min-width: $width-tablet) {

@@ -1,11 +1,21 @@
 <template>
   <div class="product-rating" title="Рейтинг товара">
-    <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path fill="#fff" d="M0 0h20v20H0z"/>
-      <path fill-rule="evenodd" clip-rule="evenodd"
-            d="M10 3.125c.238 0 .455.135.56.348l1.786 3.619 3.994.583a.625.625 0 01.346 1.066l-2.89 2.815.683 3.976a.625.625 0 01-.907.659L10 14.312l-3.572 1.879a.625.625 0 01-.906-.66l.681-3.975-2.89-2.815a.625.625 0 01.347-1.066l3.994-.583L9.44 3.473a.625.625 0 01.56-.348zm0 2.037L8.63 7.939a.625.625 0 01-.47.342l-3.067.448 2.218 2.16c.148.144.215.351.18.554l-.523 3.052 2.741-1.442a.625.625 0 01.582 0l2.741 1.442-.523-3.052a.625.625 0 01.18-.553l2.218-2.16-3.066-.45a.625.625 0 01-.47-.34L10 5.161z"
-            fill="#F2C94C"/>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+      <path fill="#fff" d="M20 20H0V0h20"/>
+
+      <path
+        d="M10 3.1c.2 0 .5.1.6.3L12.4 7l4 .6c.2 0 .4.2.5.4.1.2 0 .5-.2.6l-2.9 2.8.7 4c0 .2-.1.5-.2.6-.2.1-.4.2-.7 0L10 14.3l-3.6 1.9c-.2.1-.5.1-.7 0s-.3-.4-.2-.6l.7-4-2.9-2.9c-.2-.1-.2-.4-.1-.6.1-.2.3-.4.5-.4l4-.6 1.8-3.6c0-.2.3-.4.5-.4zm0 2.1L8.6 7.9c-.1.2-.2.4-.4.4l-3.1.4 2.2 2.2c.1.1.2.4.2.6l-.5 3 2.7-1.4c.2-.1.4-.1.6 0l2.7 1.4-.5-3.1c0-.2 0-.4.2-.6l2.2-2.2-3.1-.4c-.2 0-.4-.2-.5-.3L10 5.2z"
+        fill-rule="evenodd" clip-rule="evenodd" fill="#f2c94c"/>
+      <path v-if="rating === 5" d="M6.5 11L4 8l3.9-.4L10 4.1l1.6 3.3L16 8l-2.9 3.2.7 4.3L10 14l-3.5 1.5V11z"
+            fill="#f2c94c"/>
+      <path v-else-if="rating === 4" d="M6.5 11L4 8h12l-2.5 3v3.5l-.5 1-3-1.5-1 .5-2.5 1V11z" fill="#f2c94c"/>
+      <path v-else-if="rating === 3"
+            d="M6.8,11.9L4.4,9.5h5.7h5.7l-2.4,2.5v2.9l-0.5,0.8l-2.8-1.2l-0.9,0.4l-2.4,0.8v-0.8V11.9z" fill="#f2c94c"/>
+      <path v-else-if="rating === 2" d="M6.5 11.1v4.4l2.5-1 1-.5 3 1.5.5-1v-3.4z" fill="#f2c94c"/>
+      <path v-else-if="rating === 1" d="M6.5,12.7V15L9,14.5l1-0.3l3,0.8l0.5-0.5v-1.8H6.5z" fill="#f2c94c"/>
+      <path v-else d=""/>
     </svg>
+
     <span class="product-rating__number">{{ rating }}</span>
   </div>
 </template>
@@ -17,7 +27,8 @@ export default {
   props: {
     rating: {
       type: Number,
-      required: true
+      required: true,
+      default: 0
     },
   },
 }

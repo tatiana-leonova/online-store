@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="position: relative">
     <page-header></page-header>
     <Nuxt/>
     <button-scroll-top></button-scroll-top>
